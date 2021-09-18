@@ -15,8 +15,13 @@ class EncryptedConfig(ABC):
 
 class FernetEncryptedConfig(EncryptedConfig):
 
-    def __init__(self):
-        self.key = Fernet.generate_key()
+    def __init__(self, *args, **kwargs):
+        if isinstance(args[0], str):
+            self.key = args[0].encode()
+        elif isinstance(args[0], bytes):
+            self.key = args[0]
+        else:
+            self.key = Fernet.generate_key()
         # Instance the Fernet class with the key
         self.fernet = Fernet(self.key)  # noqa
 
