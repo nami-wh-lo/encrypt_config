@@ -54,8 +54,8 @@ def test_write_files(fernet_key, simple_dict):
     # filename = '../output/simple_dict.json'
     new_file, filename = tempfile.mkstemp()
     print(f'Filename: {filename}')
-    if os.path.exists(filename):
-        os.remove(filename)
+    #if os.path.exists(filename):
+    #    os.remove(filename)
 
     encrypted, key = manager.write(filename, simple_dict)
     assert fernet_key == key
