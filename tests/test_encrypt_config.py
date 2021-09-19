@@ -3,6 +3,7 @@
 """Tests for `encrypt_config` package."""
 import json
 import os
+import tempfile
 
 import pytest
 
@@ -24,45 +25,35 @@ def simple_dict():
     return data
 
 
-@pytest.fixture
-def fernet_dict():
-    enc_data = {
-        "username": "gAAAAABhR0R9ycCwJr_lDIKm1fh1mLoclhQsmoQRoCGJzgql9UtzBI7BpC21k6LaqdYG85BDUI0vmkvSiZxcYXEzjT3gOdOwxg==",
-        "password": "gAAAAABhR0R9Vyba6g2N3NTvJpJVC28QUda8vbFz4desjfQLzRiJ8PLnv7Caj62UU5iz2iV3m3-0AZXlDZstuzPqv8jNxtx_9w==",
-        "favorite_port": 3455
-    }
-    return enc_data
-
-
-def test_fernet_encryption():
+def test_fernet_encryption(simple_dict):
     enc_config = FernetEncryptedConfig()
-    data = {'username': 'batman_4', 'password': 'MyP8998KK-;/', 'favorite_port': 3455}
-    enc_data = enc_config.encrypt_config(data)
+    enc_data = enc_config.encrypt_config(simple_dict)
     dec_data = enc_config.decrypt_config(enc_data)
-    assert len(data) == len(enc_data)
-    assert len(data) == len(dec_data)
-    for key in data.keys():
-        assert dec_data[key] == data[key]
-        if isinstance(data[key], str):
-            assert enc_data[key] != data[key]
+    assert len(simple_dict) == len(enc_data)
+    assert len(simple_dict) == len(dec_data)
+    for key in simple_dict.keys():
+        assert dec_data[key] == simple_dict[key]
+        if isinstance(simple_dict[key], str):
+            assert enc_data[key] != simple_dict[key]
 
 
-def test_fernet_decrypt(fernet_key):
+def test_fernet_decrypt(fernet_key, simple_dict):
     enc_config = FernetEncryptedConfig(fernet_key)
-    data = {'username': 'batman_4', 'password': 'MyP8998KK-;/', 'favorite_port': 3455}
-    enc_data = enc_config.encrypt_config(data)
+    enc_data = enc_config.encrypt_config(simple_dict)
     dec_data = enc_config.decrypt_config(enc_data)
-    assert len(data) == len(enc_data)
-    assert len(data) == len(dec_data)
-    for key in data.keys():
-        assert dec_data[key] == data[key]
-        if isinstance(data[key], str):
-            assert enc_data[key] != data[key]
+    assert len(simple_dict) == len(enc_data)
+    assert len(simple_dict) == len(dec_data)
+    for key in simple_dict.keys():
+        assert dec_data[key] == simple_dict[key]
+        if isinstance(simple_dict[key], str):
+            assert enc_data[key] != simple_dict[key]
 
 
-def test_write_files(fernet_key, simple_dict, fernet_dict):
+def test_write_files(fernet_key, simple_dict):
     manager = JSONFernetFileConfig(fernet_key)
-    filename = '../output/simple_dict.json'
+    # filename = '../output/simple_dict.json'
+    new_file, filename = tempfile.mkstemp()
+    print(f'Filename: {filename}')
     if os.path.exists(filename):
         os.remove(filename)
 
