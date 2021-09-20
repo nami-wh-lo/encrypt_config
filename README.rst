@@ -25,6 +25,10 @@ Encrypt and decrypt information in configuration files.
 I find my self using json and ini files to store user credentials for
 temporary use.
 
+Currently just supporting JSON files.
+
+
+
 * Free software: Apache Software License 2.0
 * Documentation: https://encrypt-config.readthedocs.io.
 
