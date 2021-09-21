@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from encrypt_config import CONFIG_FOLDER, ALLOW_OVERWRITE, FERNET_KEY
+from encrypt_config.settings import CONFIG_FOLDER, ALLOW_OVERWRITE, FERNET_KEY
 
 
 def tests_ini_file_data():
