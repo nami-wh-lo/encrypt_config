@@ -1,15 +1,13 @@
 import configparser
 import os
 
-from appdirs import user_config_dir
 
-from encrypt_config.settings import APP_NAME, FERNET_KEY
+from encrypt_config.settings import APP_NAME, FERNET_KEY, CONFIG_FOLDER
 
 
 def get_fernet_key():
     key = None
-    config_folder = user_config_dir(APP_NAME)
-    filename = os.path.join(config_folder, FERNET_KEY)
+    filename = os.path.join(CONFIG_FOLDER, FERNET_KEY)
     if filename:
         with open(filename, 'r') as txt:
             key = txt.read()
@@ -17,14 +15,13 @@ def get_fernet_key():
 
 
 def set_fernet_key(key):
-    config_folder = user_config_dir(APP_NAME)
-    if not os.path.exists(config_folder):
-        os.mkdir(config_folder)
+    if not os.path.exists(CONFIG_FOLDER):
+        os.mkdir(CONFIG_FOLDER)
 
-    filename = os.path.join(config_folder, FERNET_KEY)
+    filename = os.path.join(CONFIG_FOLDER, FERNET_KEY)
     if filename:
         with open(filename, 'w') as txt:
-            key = txt.write(key)
+            txt.write(key)
     return filename
 
 

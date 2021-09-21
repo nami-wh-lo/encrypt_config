@@ -107,3 +107,4 @@ ENV/
 output/
 
 .DS_Store
+.encryptconfig/fernet.key

@@ -47,7 +47,7 @@ def main():
 
         enc_dict, key = fernet_encrypt(args.source_file, output_file)
         key_filename = set_fernet_key(key)
-        sys.stdout.write(f'Encrypted file written to {output_file}')
+        sys.stdout.write(f'Encrypted file written to {output_file}\n')
         sys.stdout.write(f'Key file written to {key_filename}')
 
     return 0
