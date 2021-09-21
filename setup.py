@@ -10,8 +10,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['cryptography==3.4.8']
-
+requirements = ['cryptography==3.4.8', 'appdirs==1.4.4']
 
 test_requirements = ['pytest>=3', ]
 
@@ -39,6 +38,7 @@ setup(
     license="Apache Software License 2.0",
     long_description=readme + '\n\n' + history,
     include_package_data=True,
+    package_data={'': ['*.ini']},
     keywords='encrypt_config',
     name='encrypt_config',
     packages=find_packages(include=['encrypt_config', 'encrypt_config.*']),
