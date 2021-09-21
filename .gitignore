@@ -105,3 +105,6 @@ ENV/
 .vscode/
 .idea/
 output/
+
+.DS_Store
+.encryptconfig/fernet.key
