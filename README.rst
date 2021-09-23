@@ -27,7 +27,7 @@ Most programmers do not include their credentials in the code itself. But how ma
 I find my self using json and ini files to store user credentials for
 temporary use.
 
-Currently just supporting JSON files.
+Currently just supporting JSON files and Fernet encryption.
 
 
 
