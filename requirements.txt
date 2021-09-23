@@ -1,2 +1,1 @@
 cryptography==3.4.8
-appdirs==1.4.4
