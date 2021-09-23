@@ -1,7 +1,8 @@
 import configparser
 import os
 
-
+from encrypt_config import settings
+from encrypt_config.exceptions import EncryptConfigException
 from encrypt_config.settings import APP_NAME, FERNET_KEY, CONFIG_FOLDER
 
 
@@ -19,9 +20,14 @@ def set_fernet_key(key):
         os.mkdir(CONFIG_FOLDER)
 
     filename = os.path.join(CONFIG_FOLDER, FERNET_KEY)
-    if filename:
-        with open(filename, 'w') as txt:
-            txt.write(key)
+    if os.path.exists(filename) and settings.ALLOW_OVERWRITE:
+        if filename:
+            with open(filename, 'w') as txt:
+                txt.write(key)
+    else:
+        msg = f'Fernet keys cannot be overritten. Change settings.'
+        raise EncryptConfigException(msg)
+
     return filename
 
 

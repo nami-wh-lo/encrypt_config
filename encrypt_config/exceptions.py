@@ -1,0 +1,2 @@
+class EncryptConfigException(Exception):
+    pass
