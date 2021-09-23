@@ -22,7 +22,7 @@ Encrypt Config
 
 Encrypt and decrypt information in configuration files.
 
-Most programmers do not include their credentials in the code itself. But how many times have you beeng doing peer programing and you open by mistake your credentials.
+Most programmers do not include their credentials in the code itself. But how many times have you beeng doing peer programing and you open by mistake your credentials. That embarassing moment when you expose a password with an inappropiate content... jajaja. 
 
 I find my self using json and ini files to store user credentials for
 temporary use.
@@ -38,7 +38,7 @@ Currently just supporting JSON files and Fernet encryption.
 Features
 --------
 
-* TODO
+* Encrypt json file content.
 
 Credits
 -------
