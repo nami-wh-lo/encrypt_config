@@ -12,4 +12,4 @@ home_folder = os.path.expanduser('~')
 CONFIG_FOLDER = os.path.join(home_folder, config['DEFAULT']['config_folder'])
 
 ALLOW_OVERWRITE = config['DEFAULT'].getboolean('overwrite_keys')
-FERNET_KEY = config['Fernet']['filename']
+FERNET_KEY_FILE = config['Fernet']['filename']

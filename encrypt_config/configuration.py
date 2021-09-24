@@ -7,7 +7,7 @@ from .exceptions import EncryptConfigException
 
 def get_fernet_key():
     key = None
-    filename = os.path.join(settings.CONFIG_FOLDER, settings.FERNET_KEY)
+    filename = os.path.join(settings.CONFIG_FOLDER, settings.FERNET_KEY_FILE)
     if os.path.exists(filename):
         with open(filename, 'r') as txt:
             key = txt.read()
@@ -18,7 +18,7 @@ def set_fernet_key(key):
     if not os.path.exists(settings.CONFIG_FOLDER):
         os.mkdir(settings.CONFIG_FOLDER)
 
-    filename = os.path.join(settings.CONFIG_FOLDER, settings.FERNET_KEY)
+    filename = os.path.join(settings.CONFIG_FOLDER, settings.FERNET_KEY_FILE)
     if not os.path.exists(filename) or settings.ALLOW_OVERWRITE:
         with open(filename, 'w') as txt:
             txt.write(key)
