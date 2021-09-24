@@ -4,7 +4,8 @@ import tempfile
 from encrypt_config.cli import fernet_encrypt
 
 
-def test_fernet_encrypt(unencrypted_files):
+def test_fernet_encrypt(unencrypted_files, monkeypatch):
+
     filename = unencrypted_files['unencrypted_creds.json']
     with open(filename, 'r') as json_file:
         unencrypted_data = json.load(json_file)

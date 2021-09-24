@@ -3,12 +3,11 @@ import os
 
 from . import settings
 from .exceptions import EncryptConfigException
-from .settings import FERNET_KEY, CONFIG_FOLDER
 
 
 def get_fernet_key():
     key = None
-    filename = os.path.join(CONFIG_FOLDER, FERNET_KEY)
+    filename = os.path.join(settings.CONFIG_FOLDER, settings.FERNET_KEY)
     if filename:
         with open(filename, 'r') as txt:
             key = txt.read()
@@ -16,10 +15,10 @@ def get_fernet_key():
 
 
 def set_fernet_key(key):
-    if not os.path.exists(CONFIG_FOLDER):
-        os.mkdir(CONFIG_FOLDER)
+    if not os.path.exists(settings.CONFIG_FOLDER):
+        os.mkdir(settings.CONFIG_FOLDER)
 
-    filename = os.path.join(CONFIG_FOLDER, FERNET_KEY)
+    filename = os.path.join(settings.CONFIG_FOLDER, settings.FERNET_KEY)
     if not os.path.exists(filename) or settings.ALLOW_OVERWRITE:
         with open(filename, 'w') as txt:
             txt.write(key)
