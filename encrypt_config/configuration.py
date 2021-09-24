@@ -8,7 +8,7 @@ from .exceptions import EncryptConfigException
 def get_fernet_key():
     key = None
     filename = os.path.join(settings.CONFIG_FOLDER, settings.FERNET_KEY)
-    if filename:
+    if os.path.exists(filename):
         with open(filename, 'r') as txt:
             key = txt.read()
     return key

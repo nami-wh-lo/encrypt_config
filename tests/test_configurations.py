@@ -4,7 +4,7 @@ import tempfile
 
 import pytest
 
-from encrypt_config.configuration import set_fernet_key
+from encrypt_config.configuration import set_fernet_key, get_fernet_key
 from encrypt_config import settings
 
 
@@ -35,3 +35,14 @@ def test_set_fernet_key(fernet_key_filename, monkeypatch):
         assert key == serialized_key
         assert settings.CONFIG_FOLDER in filename
         os.remove(filename)
+
+
+def test_get_fernet_key(monkeypatch):
+    with monkeypatch.context() as m:
+        mock_key_filename = '{}test_get_fernet_key.key'.format(random.randint(1, 1000))
+        m.setattr('encrypt_config.settings.FERNET_KEY', mock_key_filename, raising=True)
+
+        if os.path.exists(mock_key_filename):
+            assert False
+        key = get_fernet_key()
+        assert key is None

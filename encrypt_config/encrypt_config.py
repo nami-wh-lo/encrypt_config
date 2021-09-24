@@ -4,6 +4,9 @@ import json
 
 from cryptography.fernet import Fernet
 
+from encrypt_config.configuration import get_fernet_key
+from encrypt_config.exceptions import EncryptConfigException
+
 
 class EncryptedConfig(ABC):
     @abstractmethod
@@ -55,7 +58,19 @@ class JSONFernetFileConfig(FileConfig):  # noqa
         return encrypted_data, self.fernet_config.key.decode()
 
 
-class FernetEncryptedConfig(EncryptedConfig): # noqa
+def decrypt_data(data, type='fernet', **kwargs):
+    fernet_key = kwargs.get('fernet_key')
+    if fernet_key is None:
+        fernet_key = get_fernet_key()
+    if fernet_key is None:
+        msg = f'No key was supplied or found.'
+        raise EncryptConfigException(msg)
+    fec = FernetEncryptedConfig(fernet_key)
+    unencrypted = fec.decrypt_config(data)
+    return unencrypted
+
+
+class FernetEncryptedConfig(EncryptedConfig):  # noqa
 
     def __init__(self, *args, **kwargs):
         if len(args) > 0 and isinstance(args[0], str):
