@@ -37,7 +37,7 @@ def test_set_fernet_key(fernet_key_filename, monkeypatch):
         os.remove(filename)
 
 
-def test_get_fernet_key(monkeypatch):
+def test_get_fernet_key_no_key_file(monkeypatch):
     with monkeypatch.context() as m:
         mock_key_filename = '{}test_get_fernet_key.key'.format(random.randint(1, 1000))
         m.setattr('encrypt_config.settings.FERNET_KEY', mock_key_filename, raising=True)
