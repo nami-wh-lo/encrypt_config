@@ -59,14 +59,14 @@ class JSONFernetFileConfig(FileConfig):  # noqa
 
 
 def decrypt_data(data, type='fernet', **kwargs):
-    fernet_key = kwargs.get('fernet_key')
+    fernet_key = kwargs.pop('fernet_key')
     if fernet_key is None:
         fernet_key = get_fernet_key()
     if fernet_key is None:
         msg = f'No key was supplied or found.'
         raise EncryptConfigException(msg)
     fec = FernetEncryptedConfig(fernet_key)
-    unencrypted = fec.decrypt_config(data)
+    unencrypted = fec.decrypt_config(data, **kwargs)
     return unencrypted
 
 
