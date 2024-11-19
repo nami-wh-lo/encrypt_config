@@ -10,7 +10,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['cryptography==3.4.8', 'appdirs==1.4.4']
+requirements = ['cryptography==43.0.1', 'appdirs==1.4.4']
 
 test_requirements = ['pytest>=3', ]
 
